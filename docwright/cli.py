@@ -7,10 +7,10 @@ from pathlib import Path
 
 import click
 
-from ai_docgen.config import Config
-from ai_docgen.engine import DocsEngine
-from ai_docgen.outputs.factory import build_output
-from ai_docgen.providers.factory import build_provider
+from docwright.config import Config
+from docwright.engine import DocsEngine
+from docwright.outputs.factory import build_output
+from docwright.providers.factory import build_provider
 
 
 def get_repo_root() -> Path:
@@ -52,7 +52,7 @@ def run(dry_run: bool) -> None:
     if dry_run:
         config = Config.load(repo_root)
         triggers = config.triggers
-        from ai_docgen.analyzer import DiffAnalyzer
+        from docwright.analyzer import DiffAnalyzer
 
         analyzer = DiffAnalyzer(
             diff_text=diff_text,
@@ -85,7 +85,7 @@ def sync() -> None:
 @click.option("--output", "output_mode", default=None, type=click.Choice(["pr", "direct"]))
 def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
     """Bootstrap this repo with ai-docgen configuration."""
-    from ai_docgen.scaffolder import Scaffolder
+    from docwright.scaffolder import Scaffolder
 
     repo_root = get_repo_root()
     scaffolder = Scaffolder(repo_root=repo_root)
@@ -118,7 +118,7 @@ def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
 @click.option("--registry", "registry_path", default=None, help="Path to registry.yml")
 def dashboard(registry_path: str | None) -> None:
     """Show status of all registered projects."""
-    from ai_docgen.reporters.terminal import render_dashboard
+    from docwright.reporters.terminal import render_dashboard
 
     path = Path(registry_path) if registry_path else Path.cwd() / ".ai-docgen" / "registry.yml"
     render_dashboard(path)
@@ -129,7 +129,7 @@ def dashboard(registry_path: str | None) -> None:
 @click.option("--output", "output_file", default="ai-docgen-report.html", help="Output HTML file")
 def report(registry_path: str | None, output_file: str) -> None:
     """Generate a static HTML status report."""
-    from ai_docgen.reporters.html import render_html_report
+    from docwright.reporters.html import render_html_report
 
     reg_path = Path(registry_path) if registry_path else Path.cwd() / ".ai-docgen" / "registry.yml"
     render_html_report(reg_path, Path(output_file))

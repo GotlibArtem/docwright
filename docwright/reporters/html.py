@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from ai_docgen.registry import Registry
+from docwright.registry import Registry
 
 HTML_TEMPLATE = """\
 <!DOCTYPE html>

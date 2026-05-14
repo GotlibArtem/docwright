@@ -1,6 +1,6 @@
 import pytest
 
-from ai_docgen.renderer import DocumentRenderer, TemplateLoader
+from docwright.renderer import DocumentRenderer, TemplateLoader
 
 SAMPLE_DOC = """# My Service
 

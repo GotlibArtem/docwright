@@ -144,7 +144,7 @@ docwright report             # HTML page at docwright-report.html
 poetry install
 poetry run pytest             # 46 tests
 poetry run ruff check .       # lint
-poetry run mypy ai_docgen    # type check
+poetry run mypy docwright    # type check
 ```
 
 ## License

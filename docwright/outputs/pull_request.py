@@ -8,8 +8,8 @@ from pathlib import Path
 
 import httpx
 
-from ai_docgen.config import OutputConfig
-from ai_docgen.outputs.base import Output
+from docwright.config import OutputConfig
+from docwright.outputs.base import Output
 
 
 class PullRequestOutput(Output):

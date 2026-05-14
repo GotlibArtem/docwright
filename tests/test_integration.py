@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 import yaml
 
-from ai_docgen.config import Config
-from ai_docgen.engine import DocsEngine
+from docwright.config import Config
+from docwright.engine import DocsEngine
 
 
 def make_full_config(tmp_path: Path) -> None:

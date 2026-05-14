@@ -1,7 +1,7 @@
 from anthropic import AsyncAnthropic
 from anthropic.types import TextBlock
 
-from ai_docgen.providers.base import LLMProvider
+from docwright.providers.base import LLMProvider
 
 
 class ClaudeProvider(LLMProvider):

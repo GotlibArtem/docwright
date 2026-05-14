@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from ai_docgen.scaffolder import Scaffolder
+from docwright.scaffolder import Scaffolder
 
 
 def test_detect_python_project(tmp_path: Path) -> None:

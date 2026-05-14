@@ -20,10 +20,10 @@ classifiers = [
     "Topic :: Software Development :: Documentation",
     "Topic :: Utilities",
 ]
-packages = [{include = "ai_docgen"}]
+packages = [{include = "docwright"}]
 
 [tool.poetry.scripts]
-docwright = "ai_docgen.cli:cli"
+docwright = "docwright.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"

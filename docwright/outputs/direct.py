@@ -2,7 +2,7 @@ from pathlib import Path
 
 from git import Repo
 
-from ai_docgen.outputs.base import Output
+from docwright.outputs.base import Output
 
 
 class DirectOutput(Output):

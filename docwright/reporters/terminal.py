@@ -3,7 +3,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.table import Table
 
-from ai_docgen.registry import Registry
+from docwright.registry import Registry
 
 
 def render_dashboard(registry_path: Path) -> None:

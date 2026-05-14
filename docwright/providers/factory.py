@@ -1,10 +1,10 @@
 import os
 
-from ai_docgen.config import ProviderConfig
-from ai_docgen.providers.base import LLMProvider
-from ai_docgen.providers.claude import ClaudeProvider
-from ai_docgen.providers.ollama import OllamaProvider
-from ai_docgen.providers.openai import OpenAIProvider
+from docwright.config import ProviderConfig
+from docwright.providers.base import LLMProvider
+from docwright.providers.claude import ClaudeProvider
+from docwright.providers.ollama import OllamaProvider
+from docwright.providers.openai import OpenAIProvider
 
 
 def build_provider(config: ProviderConfig) -> LLMProvider:

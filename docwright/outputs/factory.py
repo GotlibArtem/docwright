@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from ai_docgen.config import OutputConfig
-from ai_docgen.outputs.base import Output
-from ai_docgen.outputs.direct import DirectOutput
-from ai_docgen.outputs.pull_request import PullRequestOutput
+from docwright.config import OutputConfig
+from docwright.outputs.base import Output
+from docwright.outputs.direct import DirectOutput
+from docwright.outputs.pull_request import PullRequestOutput
 
 
 def build_output(config: OutputConfig, repo_root: Path) -> Output:

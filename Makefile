@@ -9,7 +9,7 @@ fmt:
 
 lint:
 	poetry run ruff check .
-	poetry run mypy ai_docgen
+	poetry run mypy docwright
 
 test:
 	poetry run pytest -x -q

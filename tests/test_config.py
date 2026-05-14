@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from ai_docgen.config import Config
+from docwright.config import Config
 
 
 def test_load_minimal_config(tmp_path: Path) -> None:

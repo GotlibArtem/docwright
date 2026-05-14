@@ -3,11 +3,11 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from ai_docgen.config import OutputConfig
-from ai_docgen.outputs.base import Output
-from ai_docgen.outputs.direct import DirectOutput
-from ai_docgen.outputs.factory import build_output
-from ai_docgen.outputs.pull_request import PullRequestOutput
+from docwright.config import OutputConfig
+from docwright.outputs.base import Output
+from docwright.outputs.direct import DirectOutput
+from docwright.outputs.factory import build_output
+from docwright.outputs.pull_request import PullRequestOutput
 
 
 def test_output_is_abstract() -> None:
@@ -23,7 +23,7 @@ def test_direct_output_commits_changed_files(tmp_path: Path) -> None:
     mock_repo.index.add = MagicMock()
     mock_repo.index.commit = MagicMock()
 
-    with patch("ai_docgen.outputs.direct.Repo", return_value=mock_repo):
+    with patch("docwright.outputs.direct.Repo", return_value=mock_repo):
         output = DirectOutput(repo_root=tmp_path)
         output.apply(changed_files=[changed_file], message="docs: update README")
 

@@ -3,12 +3,12 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
-from ai_docgen.analyzer import DiffAnalyzer
-from ai_docgen.config import Config
-from ai_docgen.outputs.base import Output
-from ai_docgen.providers.base import LLMProvider
-from ai_docgen.registry import DocumentEntry, ProjectEntry, Registry
-from ai_docgen.renderer import DocumentRenderer, TemplateLoader
+from docwright.analyzer import DiffAnalyzer
+from docwright.config import Config
+from docwright.outputs.base import Output
+from docwright.providers.base import LLMProvider
+from docwright.registry import DocumentEntry, ProjectEntry, Registry
+from docwright.renderer import DocumentRenderer, TemplateLoader
 
 SYSTEM_PROMPT = (
     "You are a technical documentation writer. You update specific sections of documentation "

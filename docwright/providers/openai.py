@@ -1,6 +1,6 @@
 from openai import AsyncOpenAI
 
-from ai_docgen.providers.base import LLMProvider
+from docwright.providers.base import LLMProvider
 
 
 class OpenAIProvider(LLMProvider):
