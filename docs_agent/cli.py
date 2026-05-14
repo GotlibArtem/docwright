@@ -112,3 +112,25 @@ def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
     scaffolder.generate(profile, provider_type=final_provider, output_mode=final_output)
     click.echo(f"Installed docs-agent for '{profile.service_name}'.")
     click.echo("Next: set your API key env var, then run 'make docs'.")
+
+
+@cli.command()
+@click.option("--registry", "registry_path", default=None, help="Path to registry.yml")
+def dashboard(registry_path: str | None) -> None:
+    """Show status of all registered projects."""
+    from docs_agent.reporters.terminal import render_dashboard
+
+    path = Path(registry_path) if registry_path else Path.cwd() / ".docs-agent" / "registry.yml"
+    render_dashboard(path)
+
+
+@cli.command()
+@click.option("--registry", "registry_path", default=None, help="Path to registry.yml")
+@click.option("--output", "output_file", default="docs-agent-report.html", help="Output HTML file")
+def report(registry_path: str | None, output_file: str) -> None:
+    """Generate a static HTML status report."""
+    from docs_agent.reporters.html import render_html_report
+
+    reg_path = Path(registry_path) if registry_path else Path.cwd() / ".docs-agent" / "registry.yml"
+    render_html_report(reg_path, Path(output_file))
+    click.echo(f"Report saved to {output_file}")
