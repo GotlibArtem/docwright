@@ -8,8 +8,8 @@ from pathlib import Path
 
 import httpx
 
-from docs_agent.config import OutputConfig
-from docs_agent.outputs.base import Output
+from ai_docgen.config import OutputConfig
+from ai_docgen.outputs.base import Output
 
 
 class PullRequestOutput(Output):

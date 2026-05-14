@@ -3,13 +3,13 @@ from pathlib import Path
 import pytest
 import yaml
 
-from docs_agent.config import Config
+from ai_docgen.config import Config
 
 
 def test_load_minimal_config(tmp_path: Path) -> None:
-    config_dir = tmp_path / ".docs-agent"
+    config_dir = tmp_path / ".ai-docgen"
     config_dir.mkdir()
-    config_file = config_dir / "docs-agent.yml"
+    config_file = config_dir / "ai-docgen.yml"
     config_file.write_text(
         yaml.dump(
             {
@@ -33,9 +33,9 @@ def test_load_minimal_config(tmp_path: Path) -> None:
 
 
 def test_load_config_with_triggers(tmp_path: Path) -> None:
-    config_dir = tmp_path / ".docs-agent"
+    config_dir = tmp_path / ".ai-docgen"
     config_dir.mkdir()
-    config_file = config_dir / "docs-agent.yml"
+    config_file = config_dir / "ai-docgen.yml"
     config_file.write_text(
         yaml.dump(
             {

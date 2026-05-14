@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "docs-agent"
+name = "ai-docgen"
 version = "0.1.0"
 description = "AI-powered documentation agent: auto-generates and maintains README & wiki on every commit"
 authors = ["Artem Gotlib <gotlib.artem.m@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/gotlib/docs-agent"
-repository = "https://github.com/gotlib/docs-agent"
+homepage = "https://github.com/gotlib/ai-docgen"
+repository = "https://github.com/gotlib/ai-docgen"
 keywords = ["documentation", "ai", "llm", "claude", "openai", "git", "automation"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -20,10 +20,10 @@ classifiers = [
     "Topic :: Software Development :: Documentation",
     "Topic :: Utilities",
 ]
-packages = [{include = "docs_agent"}]
+packages = [{include = "ai_docgen"}]
 
 [tool.poetry.scripts]
-docs-agent = "docs_agent.cli:cli"
+ai-docgen = "ai_docgen.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"

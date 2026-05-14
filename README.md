@@ -1,4 +1,4 @@
-# docs-agent
+# ai-docgen
 
 AI-powered documentation agent that watches your commits and keeps README and wiki pages up to date automatically.
 
@@ -8,7 +8,7 @@ AI-powered documentation agent that watches your commits and keeps README and wi
 Developer commits / pushes
         │
         ▼
-CI runs docs-agent
+CI runs ai-docgen
         │
         ├─ First run?
         │   └─ Generates all docs from scratch via LLM
@@ -28,12 +28,12 @@ The agent only rewrites `<!-- AUTO:section -->` blocks. Anything you write manua
 Install into any repository:
 
 ```bash
-pip install docs-agent
-docs-agent install
+pip install ai-docgen
+ai-docgen install
 ```
 
 This asks two questions (AI provider, commit mode) and creates:
-- `.docs-agent/docs-agent.yml` — config
+- `.ai-docgen/ai-docgen.yml` — config
 - `Makefile` targets: `make docs`, `make docs-sync`
 - CI workflow (GitHub Actions or GitLab CI)
 
@@ -49,16 +49,16 @@ After that, docs update automatically on every push.
 
 | Command | Description |
 |---------|-------------|
-| `docs-agent install` | Bootstrap a repository (interactive or `--auto`) |
-| `docs-agent init` | Generate all documents from scratch |
-| `docs-agent run` | Update changed sections based on latest diff |
-| `docs-agent sync` | Force re-sync all AUTO sections |
-| `docs-agent dashboard` | Terminal table of all registered projects |
-| `docs-agent report` | Generate static HTML status report |
+| `ai-docgen install` | Bootstrap a repository (interactive or `--auto`) |
+| `ai-docgen init` | Generate all documents from scratch |
+| `ai-docgen run` | Update changed sections based on latest diff |
+| `ai-docgen sync` | Force re-sync all AUTO sections |
+| `ai-docgen dashboard` | Terminal table of all registered projects |
+| `ai-docgen report` | Generate static HTML status report |
 
 ## Configuration
 
-`.docs-agent/docs-agent.yml`:
+`.ai-docgen/ai-docgen.yml`:
 
 ```yaml
 provider:
@@ -111,7 +111,7 @@ Built-in templates cover the full documentation surface:
 | `wiki/troubleshooting` | common_issues, diagnostics, known_limitations |
 | `wiki/adr` | recent_decisions, decision_index |
 
-Custom templates go in `.docs-agent/templates/` inside your repository.
+Custom templates go in `.ai-docgen/templates/` inside your repository.
 
 ## AUTO / MANUAL Sections
 
@@ -119,23 +119,23 @@ Custom templates go in `.docs-agent/templates/` inside your repository.
 # README
 
 <!-- AUTO:overview -->
-This section is managed by docs-agent.
+This section is managed by ai-docgen.
 <!-- /AUTO:overview -->
 
 <!-- MANUAL -->
 ## Contributing
 
-Write whatever you want here — docs-agent never touches MANUAL blocks.
+Write whatever you want here — ai-docgen never touches MANUAL blocks.
 <!-- /MANUAL -->
 ```
 
 ## Central Registry
 
-After `docs-agent init`, the project is registered in a central `registry.yml`. View all projects:
+After `ai-docgen init`, the project is registered in a central `registry.yml`. View all projects:
 
 ```bash
-docs-agent dashboard          # terminal table
-docs-agent report             # HTML page at docs-agent-report.html
+ai-docgen dashboard          # terminal table
+ai-docgen report             # HTML page at ai-docgen-report.html
 ```
 
 ## Development
@@ -144,7 +144,7 @@ docs-agent report             # HTML page at docs-agent-report.html
 poetry install
 poetry run pytest             # 46 tests
 poetry run ruff check .       # lint
-poetry run mypy docs_agent    # type check
+poetry run mypy ai_docgen    # type check
 ```
 
 ## License

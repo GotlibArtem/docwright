@@ -1,6 +1,6 @@
 import httpx
 
-from docs_agent.providers.base import LLMProvider
+from ai_docgen.providers.base import LLMProvider
 
 
 class OllamaProvider(LLMProvider):

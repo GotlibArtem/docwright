@@ -3,11 +3,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from anthropic.types import TextBlock
 
-from docs_agent.config import ProviderConfig
-from docs_agent.providers.base import LLMProvider
-from docs_agent.providers.claude import ClaudeProvider
-from docs_agent.providers.factory import build_provider
-from docs_agent.providers.ollama import OllamaProvider
+from ai_docgen.config import ProviderConfig
+from ai_docgen.providers.base import LLMProvider
+from ai_docgen.providers.claude import ClaudeProvider
+from ai_docgen.providers.factory import build_provider
+from ai_docgen.providers.ollama import OllamaProvider
 
 
 def test_provider_is_abstract() -> None:
@@ -23,7 +23,7 @@ async def test_claude_provider_complete(monkeypatch: pytest.MonkeyPatch) -> None
     mock_message.content = [TextBlock(type="text", text="Updated README content")]
     mock_client.messages.create = AsyncMock(return_value=mock_message)
 
-    with patch("docs_agent.providers.claude.AsyncAnthropic", return_value=mock_client):
+    with patch("ai_docgen.providers.claude.AsyncAnthropic", return_value=mock_client):
         provider = ClaudeProvider(model="claude-sonnet-4-6", api_key="test-key")
         result = await provider.complete(system="You are a docs writer.", user="Update this.")
         assert result == "Updated README content"

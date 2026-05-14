@@ -1,4 +1,4 @@
-from docs_agent.analyzer import DiffAnalyzer
+from ai_docgen.analyzer import DiffAnalyzer
 
 
 def make_diff(files: list[str]) -> str:

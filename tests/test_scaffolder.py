@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from docs_agent.scaffolder import Scaffolder
+from ai_docgen.scaffolder import Scaffolder
 
 
 def test_detect_python_project(tmp_path: Path) -> None:
@@ -41,7 +41,7 @@ def test_generate_creates_config_file(tmp_path: Path) -> None:
     scaffolder = Scaffolder(repo_root=tmp_path)
     profile = scaffolder.detect_profile()
     scaffolder.generate(profile, provider_type="claude", output_mode="pr")
-    config_file = tmp_path / ".docs-agent" / "docs-agent.yml"
+    config_file = tmp_path / ".ai-docgen" / "ai-docgen.yml"
     assert config_file.exists()
     assert "claude" in config_file.read_text()
 
@@ -66,4 +66,4 @@ def test_generate_github_actions_workflow(tmp_path: Path) -> None:
     scaffolder.generate(profile, provider_type="claude", output_mode="pr")
     workflow = tmp_path / ".github" / "workflows" / "docs.yml"
     assert workflow.exists()
-    assert "docs-agent run" in workflow.read_text()
+    assert "ai-docgen run" in workflow.read_text()

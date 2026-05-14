@@ -1,7 +1,7 @@
 from datetime import date
 from pathlib import Path
 
-from docs_agent.registry import DocumentEntry, ProjectEntry, Registry
+from ai_docgen.registry import DocumentEntry, ProjectEntry, Registry
 
 
 def test_register_new_project(tmp_path: Path) -> None:

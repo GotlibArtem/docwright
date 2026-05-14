@@ -3,7 +3,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.table import Table
 
-from docs_agent.registry import Registry
+from ai_docgen.registry import Registry
 
 
 def render_dashboard(registry_path: Path) -> None:
@@ -12,12 +12,10 @@ def render_dashboard(registry_path: Path) -> None:
     projects = registry.all_projects()
 
     if not projects:
-        console.print(
-            "[yellow]No projects registered. Run 'docs-agent init' in a project.[/yellow]"
-        )
+        console.print("[yellow]No projects registered. Run 'ai-docgen init' in a project.[/yellow]")
         return
 
-    table = Table(title="docs-agent — Project Status", show_lines=True)
+    table = Table(title="ai-docgen — Project Status", show_lines=True)
     table.add_column("Project", style="bold")
     table.add_column("Status")
     table.add_column("Last Updated")

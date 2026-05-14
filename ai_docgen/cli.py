@@ -7,10 +7,10 @@ from pathlib import Path
 
 import click
 
-from docs_agent.config import Config
-from docs_agent.engine import DocsEngine
-from docs_agent.outputs.factory import build_output
-from docs_agent.providers.factory import build_provider
+from ai_docgen.config import Config
+from ai_docgen.engine import DocsEngine
+from ai_docgen.outputs.factory import build_output
+from ai_docgen.providers.factory import build_provider
 
 
 def get_repo_root() -> Path:
@@ -42,7 +42,7 @@ def init() -> None:
 def run(dry_run: bool) -> None:
     """Incrementally update documentation based on recent git diff."""
     repo_root = get_repo_root()
-    base_sha = os.environ.get("DOCS_AGENT_BASE_SHA", "HEAD~1")
+    base_sha = os.environ.get("AI_DOCGEN_BASE_SHA", "HEAD~1")
     try:
         diff_text = subprocess.check_output(
             ["git", "diff", f"{base_sha}..HEAD"], cwd=repo_root
@@ -52,7 +52,7 @@ def run(dry_run: bool) -> None:
     if dry_run:
         config = Config.load(repo_root)
         triggers = config.triggers
-        from docs_agent.analyzer import DiffAnalyzer
+        from ai_docgen.analyzer import DiffAnalyzer
 
         analyzer = DiffAnalyzer(
             diff_text=diff_text,
@@ -84,8 +84,8 @@ def sync() -> None:
 @click.option("--provider", default=None, type=click.Choice(["claude", "openai", "ollama"]))
 @click.option("--output", "output_mode", default=None, type=click.Choice(["pr", "direct"]))
 def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
-    """Bootstrap this repo with docs-agent configuration."""
-    from docs_agent.scaffolder import Scaffolder
+    """Bootstrap this repo with ai-docgen configuration."""
+    from ai_docgen.scaffolder import Scaffolder
 
     repo_root = get_repo_root()
     scaffolder = Scaffolder(repo_root=repo_root)
@@ -110,7 +110,7 @@ def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
         )
 
     scaffolder.generate(profile, provider_type=final_provider, output_mode=final_output)
-    click.echo(f"Installed docs-agent for '{profile.service_name}'.")
+    click.echo(f"Installed ai-docgen for '{profile.service_name}'.")
     click.echo("Next: set your API key env var, then run 'make docs'.")
 
 
@@ -118,19 +118,19 @@ def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
 @click.option("--registry", "registry_path", default=None, help="Path to registry.yml")
 def dashboard(registry_path: str | None) -> None:
     """Show status of all registered projects."""
-    from docs_agent.reporters.terminal import render_dashboard
+    from ai_docgen.reporters.terminal import render_dashboard
 
-    path = Path(registry_path) if registry_path else Path.cwd() / ".docs-agent" / "registry.yml"
+    path = Path(registry_path) if registry_path else Path.cwd() / ".ai-docgen" / "registry.yml"
     render_dashboard(path)
 
 
 @cli.command()
 @click.option("--registry", "registry_path", default=None, help="Path to registry.yml")
-@click.option("--output", "output_file", default="docs-agent-report.html", help="Output HTML file")
+@click.option("--output", "output_file", default="ai-docgen-report.html", help="Output HTML file")
 def report(registry_path: str | None, output_file: str) -> None:
     """Generate a static HTML status report."""
-    from docs_agent.reporters.html import render_html_report
+    from ai_docgen.reporters.html import render_html_report
 
-    reg_path = Path(registry_path) if registry_path else Path.cwd() / ".docs-agent" / "registry.yml"
+    reg_path = Path(registry_path) if registry_path else Path.cwd() / ".ai-docgen" / "registry.yml"
     render_html_report(reg_path, Path(output_file))
     click.echo(f"Report saved to {output_file}")

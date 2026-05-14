@@ -6,8 +6,8 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, Field
 
-CONFIG_DIR = ".docs-agent"
-CONFIG_FILE = "docs-agent.yml"
+CONFIG_DIR = ".ai-docgen"
+CONFIG_FILE = "ai-docgen.yml"
 INITIALIZED_MARKER = ".initialized"
 
 
@@ -26,7 +26,7 @@ class OutputConfig(BaseModel):
 
 class TemplatesConfig(BaseModel):
     source: Literal["builtin", "local"] = "builtin"
-    local_path: str = ".docs-agent/templates"
+    local_path: str = ".ai-docgen/templates"
 
 
 class TriggersConfig(BaseModel):
@@ -41,7 +41,7 @@ class DocumentConfig(BaseModel):
 
 
 class RegistryConfig(BaseModel):
-    path: str = "../.docs-agent/registry.yml"
+    path: str = "../.ai-docgen/registry.yml"
 
 
 class Config(BaseModel):

@@ -4,14 +4,14 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 import yaml
 
-from docs_agent.config import Config
-from docs_agent.engine import DocsEngine
+from ai_docgen.config import Config
+from ai_docgen.engine import DocsEngine
 
 
 def make_config_file(tmp_path: Path) -> None:
-    config_dir = tmp_path / ".docs-agent"
+    config_dir = tmp_path / ".ai-docgen"
     config_dir.mkdir(parents=True)
-    (config_dir / "docs-agent.yml").write_text(
+    (config_dir / "ai-docgen.yml").write_text(
         yaml.dump(
             {
                 "provider": {

@@ -28,13 +28,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install docs-agent
-      - run: docs-agent run
+      - run: pip install ai-docgen
+      - run: ai-docgen run
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCS_AGENT_BASE_SHA: >-
+          AI_DOCGEN_BASE_SHA: >-
             ${{ github.event.pull_request.base.sha || github.event.before }}
 """
 
@@ -43,21 +43,21 @@ docs:
   stage: docs
   image: python:3.12
   script:
-    - pip install docs-agent
-    - docs-agent run
+    - pip install ai-docgen
+    - ai-docgen run
   variables:
-    DOCS_AGENT_BASE_SHA: $CI_MERGE_REQUEST_DIFF_BASE_SHA
+    AI_DOCGEN_BASE_SHA: $CI_MERGE_REQUEST_DIFF_BASE_SHA
 """
 
 MAKEFILE_TARGETS = """
 docs:  ## init if not initialized, otherwise update
-\tdocs-agent run
+\tai-docgen run
 
 docs-sync:  ## force re-sync all docs against current templates
-\tdocs-agent sync
+\tai-docgen sync
 
 docs-check:  ## dry-run: show what would change
-\tdocs-agent run --dry-run
+\tai-docgen run --dry-run
 """
 
 
@@ -114,9 +114,9 @@ class Scaffolder:
         self.write_ci_workflow(profile)
 
     def write_config(self, provider_type: str, output_mode: str) -> None:
-        config_dir = self.repo_root / ".docs-agent"
+        config_dir = self.repo_root / ".ai-docgen"
         config_dir.mkdir(parents=True, exist_ok=True)
-        config_file = config_dir / "docs-agent.yml"
+        config_file = config_dir / "ai-docgen.yml"
         if config_file.exists():
             return
         api_key_env = {
@@ -138,7 +138,7 @@ class Scaffolder:
             "documents": [
                 {"type": "readme", "template": "readme/default", "target": "README.md"},
             ],
-            "registry": {"path": "../.docs-agent/registry.yml"},
+            "registry": {"path": "../.ai-docgen/registry.yml"},
         }
         config_file.write_text(yaml.dump(config, default_flow_style=False, allow_unicode=True))
 
@@ -159,5 +159,5 @@ class Scaffolder:
         elif profile.ci == "gitlab":
             gitlab_ci = self.repo_root / ".gitlab-ci.yml"
             content = gitlab_ci.read_text() if gitlab_ci.exists() else ""
-            if "docs-agent run" not in content:
+            if "ai-docgen run" not in content:
                 gitlab_ci.write_text(content + GITLAB_CI_BLOCK)
