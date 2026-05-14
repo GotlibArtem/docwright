@@ -77,3 +77,38 @@ def sync() -> None:
     engine = build_engine(get_repo_root())
     asyncio.run(engine.sync())
     click.echo("Documentation synced.")
+
+
+@cli.command("install")
+@click.option("--auto", is_flag=True, help="Non-interactive mode with auto-detected defaults.")
+@click.option("--provider", default=None, type=click.Choice(["claude", "openai", "ollama"]))
+@click.option("--output", "output_mode", default=None, type=click.Choice(["pr", "direct"]))
+def install(auto: bool, provider: str | None, output_mode: str | None) -> None:
+    """Bootstrap this repo with docs-agent configuration."""
+    from docs_agent.scaffolder import Scaffolder
+
+    repo_root = get_repo_root()
+    scaffolder = Scaffolder(repo_root=repo_root)
+    profile = scaffolder.detect_profile()
+
+    if auto:
+        final_provider = provider or "claude"
+        final_output = output_mode or "pr"
+    else:
+        click.echo(
+            f"Detected: {profile.language} project '{profile.service_name}', CI: {profile.ci}"
+        )
+        final_provider = provider or click.prompt(
+            "LLM provider",
+            type=click.Choice(["claude", "openai", "ollama"]),
+            default="claude",
+        )
+        final_output = output_mode or click.prompt(
+            "Output mode",
+            type=click.Choice(["pr", "direct"]),
+            default="pr",
+        )
+
+    scaffolder.generate(profile, provider_type=final_provider, output_mode=final_output)
+    click.echo(f"Installed docs-agent for '{profile.service_name}'.")
+    click.echo("Next: set your API key env var, then run 'make docs'.")
