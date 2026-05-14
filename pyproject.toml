@@ -5,8 +5,8 @@ description = "AI-powered documentation agent: auto-generates and maintains READ
 authors = ["Artem Gotlib <gotlib.artem.m@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/gotlib/ai-docgen"
-repository = "https://github.com/gotlib/ai-docgen"
+homepage = "https://github.com/GotlibArtem/ai-docgen"
+repository = "https://github.com/GotlibArtem/ai-docgen"
 keywords = ["documentation", "ai", "llm", "claude", "openai", "git", "automation"]
 classifiers = [
     "Development Status :: 3 - Alpha",
