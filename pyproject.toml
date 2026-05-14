@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ai-docgen"
+name = "docwright"
 version = "0.1.0"
 description = "AI-powered documentation agent: auto-generates and maintains README & wiki on every commit"
 authors = ["Artem Gotlib <gotlib.artem.m@gmail.com>"]
