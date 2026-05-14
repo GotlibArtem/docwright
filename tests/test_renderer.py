@@ -1,4 +1,6 @@
-from docs_agent.renderer import DocumentRenderer
+import pytest
+
+from docs_agent.renderer import DocumentRenderer, TemplateLoader
 
 SAMPLE_DOC = """# My Service
 
@@ -62,3 +64,22 @@ def test_auto_section_names() -> None:
     renderer = DocumentRenderer()
     names = renderer.auto_section_names(SAMPLE_DOC)
     assert names == ["overview", "getting_started"]
+
+
+def test_load_builtin_readme_template() -> None:
+    loader = TemplateLoader(source="builtin")
+    content = loader.load("readme/default")
+    assert "AUTO:overview" in content
+    assert "AUTO:getting_started" in content
+
+
+def test_load_missing_template_raises() -> None:
+    loader = TemplateLoader(source="builtin")
+    with pytest.raises(FileNotFoundError):
+        loader.load("readme/nonexistent")
+
+
+def test_render_template_with_context() -> None:
+    loader = TemplateLoader(source="builtin")
+    result = loader.render("readme/default", {"service_name": "my-service"})
+    assert "# my-service" in result
