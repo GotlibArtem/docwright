@@ -5,8 +5,8 @@ description = "AI-powered documentation agent: auto-generates and maintains READ
 authors = ["Artem Gotlib <gotlib.artem.m@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/GotlibArtem/ai-docgen"
-repository = "https://github.com/GotlibArtem/ai-docgen"
+homepage = "https://github.com/GotlibArtem/docwright"
+repository = "https://github.com/GotlibArtem/docwright"
 keywords = ["documentation", "ai", "llm", "claude", "openai", "git", "automation"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -23,7 +23,7 @@ classifiers = [
 packages = [{include = "ai_docgen"}]
 
 [tool.poetry.scripts]
-ai-docgen = "ai_docgen.cli:cli"
+docwright = "ai_docgen.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"

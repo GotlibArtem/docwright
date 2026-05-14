@@ -1,4 +1,4 @@
-# ai-docgen
+# docwright
 
 AI-powered documentation agent that watches your commits and keeps README and wiki pages up to date automatically.
 
@@ -8,7 +8,7 @@ AI-powered documentation agent that watches your commits and keeps README and wi
 Developer commits / pushes
         │
         ▼
-CI runs ai-docgen
+CI runs docwright
         │
         ├─ First run?
         │   └─ Generates all docs from scratch via LLM
@@ -28,12 +28,12 @@ The agent only rewrites `<!-- AUTO:section -->` blocks. Anything you write manua
 Install into any repository:
 
 ```bash
-pip install ai-docgen
-ai-docgen install
+pip install docwright
+docwright install
 ```
 
 This asks two questions (AI provider, commit mode) and creates:
-- `.ai-docgen/ai-docgen.yml` — config
+- `.docwright/docwright.yml` — config
 - `Makefile` targets: `make docs`, `make docs-sync`
 - CI workflow (GitHub Actions or GitLab CI)
 
@@ -49,16 +49,16 @@ After that, docs update automatically on every push.
 
 | Command | Description |
 |---------|-------------|
-| `ai-docgen install` | Bootstrap a repository (interactive or `--auto`) |
-| `ai-docgen init` | Generate all documents from scratch |
-| `ai-docgen run` | Update changed sections based on latest diff |
-| `ai-docgen sync` | Force re-sync all AUTO sections |
-| `ai-docgen dashboard` | Terminal table of all registered projects |
-| `ai-docgen report` | Generate static HTML status report |
+| `docwright install` | Bootstrap a repository (interactive or `--auto`) |
+| `docwright init` | Generate all documents from scratch |
+| `docwright run` | Update changed sections based on latest diff |
+| `docwright sync` | Force re-sync all AUTO sections |
+| `docwright dashboard` | Terminal table of all registered projects |
+| `docwright report` | Generate static HTML status report |
 
 ## Configuration
 
-`.ai-docgen/ai-docgen.yml`:
+`.docwright/docwright.yml`:
 
 ```yaml
 provider:
@@ -111,7 +111,7 @@ Built-in templates cover the full documentation surface:
 | `wiki/troubleshooting` | common_issues, diagnostics, known_limitations |
 | `wiki/adr` | recent_decisions, decision_index |
 
-Custom templates go in `.ai-docgen/templates/` inside your repository.
+Custom templates go in `.docwright/templates/` inside your repository.
 
 ## AUTO / MANUAL Sections
 
@@ -119,23 +119,23 @@ Custom templates go in `.ai-docgen/templates/` inside your repository.
 # README
 
 <!-- AUTO:overview -->
-This section is managed by ai-docgen.
+This section is managed by docwright.
 <!-- /AUTO:overview -->
 
 <!-- MANUAL -->
 ## Contributing
 
-Write whatever you want here — ai-docgen never touches MANUAL blocks.
+Write whatever you want here — docwright never touches MANUAL blocks.
 <!-- /MANUAL -->
 ```
 
 ## Central Registry
 
-After `ai-docgen init`, the project is registered in a central `registry.yml`. View all projects:
+After `docwright init`, the project is registered in a central `registry.yml`. View all projects:
 
 ```bash
-ai-docgen dashboard          # terminal table
-ai-docgen report             # HTML page at ai-docgen-report.html
+docwright dashboard          # terminal table
+docwright report             # HTML page at docwright-report.html
 ```
 
 ## Development
